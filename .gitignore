@@ -1,0 +1,13 @@
+*.log
+*.pyc
+.DS_Store
+.cache/
+.coverage
+.idea/
+.vscode/
+clickhouse_client_pool.egg-info/
+build/
+dist/
+docs/build/
+venv/
+wheelhouse/

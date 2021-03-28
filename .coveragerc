@@ -1,0 +1,15 @@
+[run]
+source =
+    clickhouse_client_pool
+    tests
+branch = True
+omit =
+    clickhouse_client_pool/cli.py
+
+[report]
+exclude_lines =
+    no cov
+    no qa
+    noqa
+    pragma: no cover
+    if __name__ == .__main__.:

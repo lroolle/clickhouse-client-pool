@@ -1,0 +1,26 @@
+[metadata]
+name = 'clickhouse-client-pool'
+version = '0.0.1'
+description = ''
+author = 'Eric Wang'
+author_email = 'wrqatw@gmail.com'
+license = 'MIT'
+url = 'https://github.com/lroolle/clickhouse-client-pool'
+
+[requires]
+python_version = ['2.7', '3.5', '3.6', 'pypy', 'pypy3']
+
+[build-system]
+requires = ['setuptools', 'wheel']
+
+[tool.hatch.commands]
+prerelease = 'hatch build'
+
+[tool.poetry]
+name = 'clickhouse-client-pool'
+version = '0.1'
+description = 'Clickhouse Client Pool'
+authors = ['EricWang']
+
+[tool.poetry.dependencies]
+clickhouse-driver = '^0.2.0'
