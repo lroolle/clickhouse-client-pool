@@ -8,7 +8,7 @@ license = 'MIT'
 url = 'https://github.com/lroolle/clickhouse-client-pool'
 
 [requires]
-python_version = ['2.7', '3.5', '3.6', 'pypy', 'pypy3']
+python_version = ['2.7', '3.6']
 
 [build-system]
 requires = ['setuptools', 'wheel']
@@ -20,7 +20,7 @@ prerelease = 'hatch build'
 name = 'clickhouse-client-pool'
 version = '0.1'
 description = 'Clickhouse Client Pool'
-authors = ['EricWang']
+authors = ['Eric Wang']
 
 [tool.poetry.dependencies]
 clickhouse-driver = '^0.2.0'

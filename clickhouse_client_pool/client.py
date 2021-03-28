@@ -31,13 +31,14 @@ class ClickHouseClientPool(object):
     config.xml: <max_connections>4096</max_connections>
     """
 
-    def __init__(self, host, port, max_connections=10, **kwargs):
+    def __init__(self, host, port=9000, max_connections=10, **kwargs):
         self.connection_args = {"host": host, "port": port, **kwargs}
         self.max_connections = max_connections
         self.closed = False
         self._pool = list()
         self._client_used = dict()
         self._lock = threading.Lock()
+        self._pool.append(self.pull())
 
     def execute(self, sql, with_column_types=True, *args, **kwargs):
         client = self.pull()
@@ -112,7 +113,7 @@ class ClickHouseClientPool(object):
             if self.closed:
                 return
 
-            clients = clients or self._pool + self._client_used.values()
+            clients = clients or self._pool + list(self._client_used.values())
             try:
                 for client in clients:
                     client.disconnect()
@@ -128,12 +129,10 @@ class ClickHouseClientPool(object):
             del self._client_used[id(client)]
 
     def _set_client_used(self, client):
-        with self._lock:
-            self._client_used[id(client)] = client
+        self._client_used[id(client)] = client
 
     def _new_client(self):
         client = BlockedClient(**self.connection_args)
-        client.connection.force_connect()
         self._set_client_used(client)
         return client
 
