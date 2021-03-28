@@ -1,5 +1,10 @@
+import itertools
+import logging
 import threading
+
 from clickhouse_driver import Client
+
+logger = logging.getLogger()
 
 
 class BlockedClient(Client):
@@ -124,8 +129,8 @@ class ClickHouseClientPool(object):
                 )
 
     def _del_client_used(self, client):
+        self._cleanup_connections([client])
         with self._lock:
-            self._cleanup_connections([client])
             del self._client_used[id(client)]
 
     def _set_client_used(self, client):
